@@ -22,3 +22,10 @@ code:not([class*='language-']):after {
 code[class*='language-'] {
   padding: 0;
 }
+.fc-scrollgrid-sync-inner {
+  cursor: pointer;
+}
+.fc-scrollgrid-sync-inner:hover {
+  background-color: rgb(145, 85, 253);
+  color: #fff;
+}

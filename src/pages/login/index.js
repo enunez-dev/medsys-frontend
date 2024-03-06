@@ -103,8 +103,8 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 }))
 
 const schema = yup.object().shape({
-  email: yup.string().min(5).required(),
-  password: yup.string().min(5).required()
+  email: yup.string().required('Ingresa tu correo.'),
+  password: yup.string().required('Ingresa tu contraseña.')
 })
 
 const defaultValues = {
@@ -154,7 +154,7 @@ const LoginPage = () => {
     auth.login({ email, password, rememberMe }, () => {
       setError('email', {
         type: 'manual',
-        message: 'Email or Password is invalid'
+        message: 'Correo no encontrado'
       })
     })
   }

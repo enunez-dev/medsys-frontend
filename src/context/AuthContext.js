@@ -110,7 +110,6 @@ const AuthProvider = ({ children }) => {
         if (response?.data?.data == '1') {
           router.push('/login')
           toast.success('Creado correctamente');
-          window.localStorage.setItem('userNew', params.email)
         }
         else {
           toast.error('Error al guardar')

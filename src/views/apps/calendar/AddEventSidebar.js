@@ -34,6 +34,8 @@ import { useDispatch, useSelector } from 'react-redux'
 // ** Styled Components
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
+import { toast } from 'react-hot-toast'
+
 import {
   fetchAppointment,
   checkAppointment
@@ -67,30 +69,6 @@ const AddEventSidebar = props => {
     addEventSidebarOpen,
     handleAddEventSidebarToggle
   } = props
-
-  const dates = [
-    {
-      date: '2024-03-11',
-      hoursStart: [
-        '08:00',
-        '08:15',
-        '08:30',
-        '08:45',
-        '09:00',
-        '09:15',
-        '09:30',
-        '09:45',
-        '10:00',
-        '10:15',
-        '10:30',
-        '10:45',
-        '11:00',
-        '11:15',
-        '11:30',
-        '11:45'
-      ]
-    }
-  ]
 
   // ** States
   const [values, setValues] = useState(defaultState)
@@ -231,8 +209,10 @@ const AddEventSidebar = props => {
   const handleCheck = (data) => {
     dispatch(checkAppointment({
       appointmentid: data.appointment_id
-    }))
-    router.push('/my-appointments')
+    })).then((response) => {
+      toast.success('Agendado correctamente');
+      router.push('/my-appointments')
+    })
   }
 
   return (
