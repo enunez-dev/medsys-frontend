@@ -9,6 +9,7 @@ import axios from 'axios'
 
 // ** Config
 import authConfig from 'src/configs/auth'
+import { toast } from 'react-hot-toast'
 
 // ** Defaults
 const defaultProvider = {
@@ -17,7 +18,8 @@ const defaultProvider = {
   setUser: () => null,
   setLoading: () => Boolean,
   login: () => Promise.resolve(),
-  logout: () => Promise.resolve()
+  logout: () => Promise.resolve(),
+  register: () => Promise.resolve()
 }
 const AuthContext = createContext(defaultProvider)
 
@@ -91,13 +93,45 @@ const AuthProvider = ({ children }) => {
     router.push('/login')
   }
 
+  const handRegister = (params) => {
+    const url = 'https://medsys-backend.onrender.com/patient/register';
+
+    const body = {
+      "fullName": params.fullName,
+      "birthday": params.birthday,
+      "sexo": params.sex,
+      "email": params.email,
+      "password": params.password
+    }
+    axios
+      .post(url, body)
+      .then(response => {
+        console.log(response)
+        if (response?.data?.data == '1') {
+          router.push('/login')
+          toast.success('Creado correctamente');
+          window.localStorage.setItem('userNew', params.email)
+        }
+        else {
+          toast.error('Error al guardar')
+        }
+
+      })
+      .catch(err => {
+        console.log(err)
+
+        // if (errorCallback) errorCallback(err)
+      })
+  }
+
   const values = {
     user,
     loading,
     setUser,
     setLoading,
     login: handleLogin,
-    logout: handleLogout
+    logout: handleLogout,
+    register: handRegister
   }
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
