@@ -56,6 +56,7 @@ const Calendar = props => {
       // events: eventsData,
       plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin, bootstrap5Plugin],
       initialView: 'dayGridMonth',
+
       // headerToolbar: {
       //   start: 'sidebarToggle, prev, next, title',
       //   end: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
